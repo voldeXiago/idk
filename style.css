@@ -1,0 +1,79 @@
+body {
+  background-color: lightblue;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+h1 {
+  position: absolute;
+  top: 50px;
+}
+
+.circle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+  height: 300px;
+  /*border: 2px solid #333;*/
+  border-radius: 50%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+button {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  /*border: 2px solid #333;*/
+  background-color: rgb(255,255,255);
+  font-size: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  position: absolute;
+}
+
+
+
+/* Small Circle */
+.Small_circle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+  height: 300px;
+  /*border: 2px solid #333;*/
+  border-radius: 50%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Small Buttons */
+.Small_button {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  /*border: 2px solid #333;*/
+  font-size: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  position: absolute;
+}
+
+
+.dim_button {
+  display: none
+}

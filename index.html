@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>hmm</title>
+</head>
+<body>
+  
+  <link rel="stylesheet" href="style.css">
+  <h1 style="color:rgb(100, 100, 100);text-decoration:wavy;text-shadow:0cqmax">interesting</h1>
+  <script src="https://cdn.jsdelivr.net/npm/tone@14.7.77/build/Tone.js"></script>
+  <script src="script.js"></script>
+  <div class="circle" onclick="handleButtonClick(event)">
+    <button data-pitch="1">C</button>
+    <button data-pitch="2**(7/12)">G</button>
+    <button data-pitch="2**(2/12)">D</button>
+    <button data-pitch="2**(9/12)">A</button>
+    <button data-pitch="2**(4/12)">E</button>
+    <button data-pitch="2**(11/12)">H</button>
+    <button data-pitch="2**(6/12)">F#</button>
+    <button data-pitch="2**(1/12)">C#</button>
+    <button data-pitch="2**(8/12)">G#</button>
+    <button data-pitch="2**(3/12)">E♭</button>
+    <button data-pitch="2**(10/12)">B</button>
+    <button data-pitch="2**(5/12)">F</button>
+  </div>
+  <div class="Small_circle" onclick="Small_handleButtonClick(event)">
+    <button data-pitch="2**(9/12)">a</button>
+    <button data-pitch="2**(4/12)">e</button>
+    <button data-pitch="2**(11/12)">h</button>
+    <button data-pitch="2**(6/12)">f#</button>
+    <button data-pitch="2**(1/12)">c#</button>
+    <button data-pitch="2**(8/12)">g#</button>
+    <button data-pitch="2**(3/12)">e♭</button>
+    <button data-pitch="2**(10/12)">b</button>
+    <button data-pitch="2**(5/12)">f</button>
+    <button data-pitch="1">c</button>
+    <button data-pitch="2**(7/12)">g</button>
+    <button data-pitch="2**(2/12)">d</button>
+  </div>
+  <script>
+    function positionButtons() {
+      const circleDiv = document.querySelector('.circle');
+      const buttons = circleDiv.querySelectorAll('button');
+      const totalButtons = buttons.length;
+      const radius = 300; 
+
+      buttons.forEach((button, index) => {
+        const angle = ((360 / totalButtons) * index) * (Math.PI / 180);
+        const x = circleDiv.clientWidth / 2 + radius * Math.cos(angle) - button.clientWidth / 2;
+        const y = circleDiv.clientHeight / 2 + radius * Math.sin(angle) - button.clientHeight / 2;
+        button.style.left = `${x}px`;
+        button.style.top = `${y}px`;
+      });
+
+      const Small_circleDiv = document.querySelector('.Small_circle');
+      const Small_buttons = Small_circleDiv.querySelectorAll('button');
+      const Small_totalButtons = Small_buttons.length;
+      console.log(Small_buttons.length+" small_buttons");
+      const Small_radius = 180; 
+
+      Small_buttons.forEach((Small_button, index) => {
+        const Small_angle = ((360 / Small_totalButtons) * index) * (Math.PI / 180);
+        const Small_x = Small_circleDiv.clientWidth / 2 + Small_radius * Math.cos(Small_angle) - Small_button.clientWidth / 2;
+        const Small_y = Small_circleDiv.clientHeight / 2 + Small_radius * Math.sin(Small_angle) - Small_button.clientHeight / 2;
+        Small_button.style.left = `${Small_x}px`;
+        Small_button.style.top = `${Small_y}px`;
+      });
+    }
+
+    function handleButtonClick(event) {
+      const button = event.target;
+      const pitch = button.dataset.pitch;
+      console.log("Clicked button with pitch:", pitch);
+      playMajChord(pitch)
+    }
+    function Small_handleButtonClick(event) {
+      const button = event.target;
+      const pitch = button.dataset.pitch;
+      console.log("Clicked button with pitch:", pitch);
+      playMinChord(pitch)
+    }
+
+    positionButtons();
+    window.addEventListener('resize', positionButtons);
+  </script>
+</body>
+</html>
