@@ -19,6 +19,18 @@ function getFrequency(note){
   }
   return(2**(note_position/12))
 }
+function getNotes(step){
+  let note_position = Math.round(Math.log2(step) *12)
+  while (note_position<0){
+    note_position += 12 
+  }
+  while (note_position>11){
+    note_position -= 12 
+  }
+  l(note_position)
+  return notes[note_position]
+}
+
 
 
 function delay(time){
@@ -27,7 +39,7 @@ function delay(time){
 
 function playNote() {
   const audio = new Tone.Player({
-    url: 'C4.wav', 
+    url: 'C2.wav', 
     playbackRate: currentRegister*currentPitch*keyChange,
     
     autostart: true,
@@ -64,7 +76,6 @@ async function playMajChord(pitch){
     playNote()
     currentPitch = pitch/2;
     playNote()
-    play('F',1,1/2,4)
   }
   if (mode ==2){
     var delay_time = 1000
@@ -273,27 +284,25 @@ function handleKeyPress(event) {
     case '8':
       mode = 8
       break;
-    case 'z':
-      currentRegister*=2
+    case '-':
+      keyChange/=2**(1/12)
+      document.getElementById("key").textContent = getNotes(keyChange)
       break;
 
-    case 'x':
+    case '=':
+      keyChange*=2**(1/12)
+      document.getElementById("key").textContent = getNotes(keyChange)
+      break;
+      
+    case '`':
+      currentRegister*=2
+      break;
+ 
+    case 'shift':
       currentRegister/=2
       break;
 
-    case 'c':
-      keyChange*=2**(1/12)
-      break;
-
-    case 'v':
-      keyChange/=2**(1/12)
-      break;
-    case 'b':
-      mode = 10
-      break;
-    case 'n':
-      mode = 11
-      break;
+    
     case 'q':
       currentPitch = 2**(-1/12);
       playNote();
@@ -382,6 +391,7 @@ function handleKeyPress(event) {
       currentPitch = 2**(20/12);
       playNote()
       break;
+    //volume
     case 'arrowup':
       currentVolume = Math.min(currentVolume + volumeStep, 1);
       Tone.Destination.volume.value = Tone.gainToDb(currentVolume);
@@ -390,8 +400,27 @@ function handleKeyPress(event) {
       currentVolume = Math.max(currentVolume - volumeStep, 0);
       Tone.Destination.volume.value = Tone.gainToDb(currentVolume);
       break;
-      }
-
+      
+    //chords
+    case 'b':
+      playMajChord(getFrequency("C"));
+      break;
+    case 'n':
+      playMajChord(getFrequency("D"));
+      break;
+    case 'm':
+      playMajChord(getFrequency("E"));
+      break;
+    case ',':
+      playMajChord(getFrequency("F"));
+      break;
+    case '.':
+      playMajChord(getFrequency("G"));
+      break;
+    case '/':
+      playMajChord(getFrequency("A"))
+    
+    }
   }
 
 
@@ -409,8 +438,8 @@ function toggleButtonColor(event) {
   console.log(currentAngle);
   const button = event.target;
   button.style.backgroundColor = getRGB(currentAngle);
-  currentAngle += 0.01; 
-  
+  currentAngle += 4; 
+   
 }
 
 const buttons = document.querySelectorAll('.circle button');

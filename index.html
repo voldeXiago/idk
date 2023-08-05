@@ -2,9 +2,10 @@
 <html>
 <head>
   <title>hmm</title>
+  <h2 id="key" style="text-align:left">C</h2>
 </head>
 <body>
-  
+ 
   <link rel="stylesheet" href="style.css">
   <h1 style="color:rgb(100, 100, 100);text-decoration:wavy;text-shadow:0cqmax">interesting</h1>
   <script src="https://cdn.jsdelivr.net/npm/tone@14.7.77/build/Tone.js"></script>
@@ -71,13 +72,15 @@
       const button = event.target;
       const pitch = button.dataset.pitch;
       console.log("Clicked button with pitch:", pitch);
-      playMajChord(pitch)
+      toggleButtonColor(event);
+      playMajChord(eval(pitch));
     }
     function Small_handleButtonClick(event) {
       const button = event.target;
       const pitch = button.dataset.pitch;
       console.log("Clicked button with pitch:", pitch);
-      playMinChord(pitch)
+      toggleButtonColor(event);
+      playMinChord(eval(pitch))
     }
 
     positionButtons();

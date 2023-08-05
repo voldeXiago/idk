@@ -1,8 +1,14 @@
+head {
+  position: absolute;
+  align-items: start;
+
+}
+
 body {
   background-color: lightblue;
   display: flex;
   justify-content: center;
-  align-items: center;
+  /*align-items: center;*/
   height: 100vh;
   margin: 0;
 }
@@ -11,6 +17,7 @@ h1 {
   position: absolute;
   top: 50px;
 }
+ 
 
 .circle {
   position: absolute;
